@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haber Analiz Paneli</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Haber Analiz Paneli</h1>
+    </header>
+
+    <main>
+        <section class="search-section">
+            <input type="text" id="search-input" placeholder="Haber başlıklarında veya içerikte ara..." class="large-search-input">
+        </section>
+
+        <section class="filters">
+            <select id="category-filter">
+                <option value="">Tüm Kategoriler</option>
+            </select>
+            <input type="range" id="importance-slider" min="0" max="100" value="0">
+            <span id="importance-value">0+</span>
+            <select id="source-filter">
+                <option value="">Tüm Kaynaklar</option>
+            </select>
+        </section>
+
+        <section id="news-dashboard">
+            </section>
+    </main>
+
+    <div id="modal" class="modal">
+        </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
