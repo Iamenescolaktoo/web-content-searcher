@@ -1,9 +1,6 @@
-// This file will now fetch real data from your backend APIs.
-
-// The API endpoints for your services as defined in docker-compose.yml
-// We will use relative paths or proxies configured in the nginx.conf
-const SCRAPPER_API_URL = "http://localhost:8001";
-const ANALYZER_API_URL = "http://localhost:5001";
+// The API endpoints will now use the Nginx proxy paths.
+const SCRAPPER_API_URL = "/api/scrape";
+const ANALYZER_API_URL = "/api/analyze";
 
 // Select UI elements
 const newsList = document.getElementById('newsList');
@@ -22,20 +19,23 @@ function renderNews(newsToDisplay) {
     newsToDisplay.forEach(news => {
         // The backend now returns a "risk_point" instead of a "score"
         const scoreColor = news.risk_point > 7 ? 'bg-red-500' : news.risk_point > 4 ? 'bg-yellow-500' : 'bg-green-500';
-
+        
         // Create the card
         const card = `
             <div class="bg-white border border-gray-200 rounded p-4">
                 <div class="flex items-center justify-between mb-2">
+                    <!-- The backend now returns a "source" (link) and a "datetime" -->
                     <span class="text-xs text-gray-500">${new URL(news.source).hostname} - ${new Date(news.datetime).toLocaleDateString()}</span>
                     <div class="flex items-center space-x-2">
+                        <!-- Displaying the risk point from the backend -->
                         <span class="px-2 py-0.5 text-xs font-medium text-white rounded ${scoreColor}">${news.risk_point || 'N/A'}</span>
                     </div>
                 </div>
                 <h3 class="text-lg font-medium text-gray-900 mb-2">${news.title}</h3>
                 <div class="flex flex-wrap gap-1 mt-2">
+                    <!-- Displaying the category from the backend -->
                     ${news.category ? `<span class="px-2 py-0.5 text-xs font-medium text-blue-800 bg-blue-100 rounded">${news.category}</span>` : ''}
-                    </div>
+                </div>
                 <div class="mt-2">
                     <h4 class="text-sm text-gray-700">Keywords:</h4>
                     <div class="flex flex-wrap gap-1 mt-1">
@@ -50,12 +50,10 @@ function renderNews(newsToDisplay) {
 
 // Function to fetch news from the scraper backend
 async function fetchNews() {
-    // You might want to add a loading state here
     newsList.innerHTML = '<p class="col-span-full text-center text-gray-500 text-lg">Loading news...</p>';
 
     try {
-        // Example of a hardcoded URL. You can make this dynamic later.
-        const response = await fetch(`${SCRAPPER_API_URL}/scrape?url=https://www.cnnturk.com/feed/rss/all/all`, {
+        const response = await fetch(`${SCRAPPER_API_URL}?url=https://www.cnnturk.com/feed/rss/all/all`, {
             method: 'GET'
         });
 
@@ -76,7 +74,7 @@ async function fetchNews() {
 // Function to analyze a piece of text using the LLM API
 async function analyzeText(text) {
     try {
-        const response = await fetch(`${ANALYZER_API_URL}/metin_analiz`, {
+        const response = await fetch(ANALYZER_API_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -98,20 +96,7 @@ async function analyzeText(text) {
     }
 }
 
-// Event listeners to run on page load and when filters change
+// Event listeners to run on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // We now call the fetchNews function instead of rendering mock data
     fetchNews();
 });
-
-// The filter and search functions would need to be updated to work with the fetched data
-// and potentially make new API calls, but for now, we'll just focus on fetching the initial data.
-function filterAndSearch() {
-    // This function will need to be updated to filter the fetched newsData
-    // For now, we will simply refetch the data.
-    console.log("Filter and search functionality to be implemented with fetched data.");
-}
-
-searchInput.addEventListener('input', filterAndSearch);
-categoryFilter.addEventListener('change', filterAndSearch);
-sentimentFilter.addEventListener('change', filterAndSearch);
