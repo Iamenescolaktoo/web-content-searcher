@@ -1,40 +1,49 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haber Analiz Paneli</title>
+    <title>News Analyzer System</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-
-    <header>
-        <h1>Haber Analiz Paneli</h1>
+<body class="min-h-screen flex flex-col items-center p-4 md:p-8">
+    
+    <header class="w-full max-w-7xl text-center mb-8">
+        <h1 class="text-3xl font-semibold text-slate-800">News Analyzer System</h1>
+        <p class="mt-1 text-md text-slate-600">Analyze, classify, and monitor daily news.</p>
     </header>
 
-    <main>
-        <section class="search-section">
-            <input type="text" id="search-input" placeholder="Haber başlıklarında veya içerikte ara..." class="large-search-input">
-        </section>
-
-        <section class="filters">
-            <select id="category-filter">
-                <option value="">Tüm Kategoriler</option>
-            </select>
-            <input type="range" id="importance-slider" min="0" max="100" value="0">
-            <span id="importance-value">0+</span>
-            <select id="source-filter">
-                <option value="">Tüm Kaynaklar</option>
-            </select>
-        </section>
-
-        <section id="news-dashboard">
-            </section>
-    </main>
-
-    <div id="modal" class="modal">
+    <section class="w-full max-w-7xl bg-white border border-gray-200 rounded p-4 mb-6 flex flex-col md:flex-row items-center gap-3">
+        <div class="relative w-full">
+            <input type="text" id="searchInput" placeholder="Search news..." class="w-full pl-9 pr-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 transition-colors">
+            <svg class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
         </div>
+        <select id="categoryFilter" class="w-full md:w-auto border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-1 focus:ring-gray-400 transition-colors">
+            <option value="">All Categories</option>
+            <option value="Economy">Economy</option>
+            <option value="Politics">Politics</option>
+            <option value="Technology">Technology</option>
+            <option value="Sports">Sports</option>
+            <option value="Health">Health</option>
+        </select>
+        <select id="sentimentFilter" class="w-full md:w-auto border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-1 focus:ring-gray-400 transition-colors">
+            <option value="">All Sentiments</option>
+            <option value="Positive">Positive</option>
+            <option value="Neutral">Neutral</option>
+            <option value="Negative">Negative</option>
+        </select>
+    </section>
+
+    <main class="w-full max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="newsList">
+        </main>
 
     <script src="script.js"></script>
+
 </body>
 </html>
