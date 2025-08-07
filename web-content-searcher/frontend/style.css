@@ -1,0 +1,272 @@
+/* --- Genel Sayfa Ayarları --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5; /* Hafif bir arka plan rengi */
+    color: #333;
+    line-height: 1.6;
+}
+
+/* --- Başlık (Header) --- */
+header {
+    background-color: #0056b3; /* Koyu mavi */
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 300;
+}
+
+/* --- Ana İçerik Alanı --- */
+main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* --- Büyük Arama Çubuğu --- */
+.search-section {
+    width: 100%;
+}
+
+.large-search-input {
+    width: 100%;
+    padding: 18px 25px;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.large-search-input:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 8px rgba(0, 86, 179, 0.2);
+    outline: none;
+}
+
+/* --- Filtreler Bölümü --- */
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filters select,
+.filters input[type="range"] {
+    flex: 1;
+    min-width: 150px; /* Küçük ekranlarda bile görünürlük için */
+}
+
+.filters select {
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.filters input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filters input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #0056b3;
+    cursor: pointer;
+    margin-top: -6px; /* Konumu ayarlama */
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+#importance-value {
+    font-weight: bold;
+    color: #0056b3;
+    min-width: 40px;
+    text-align: right;
+}
+
+/* --- Haber Kartları Paneli --- */
+#news-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+/* --- Haber Kartı --- */
+.news-card {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.news-card h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    color: #0056b3;
+}
+
+.news-card .source,
+.news-card .date {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.news-card .importance-score {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background-color: #ff6347; /* Örnek renk, JavaScript ile değişmeli */
+    color: white;
+    padding: 0.5rem 0.8rem;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.news-card .summary {
+    font-size: 1rem;
+    color: #444;
+}
+
+.details-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+}
+
+.details-btn:hover {
+    background-color: #0056b3;
+}
+
+/* --- Modal Pencere --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    overflow: auto;
+    padding-top: 50px;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: #aaa;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+.modal-content h2 {
+    color: #0056b3;
+    margin-top: 0;
+    font-size: 2rem;
+}
+
+.modal-content #analysis-results {
+    margin-top: 1.5rem;
+    padding-left: 0;
+}
+
+.modal-content #analysis-results h3 {
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* --- Responsive Tasarım Ayarları --- */
+@media (max-width: 768px) {
+    main {
+        padding: 1rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filters select,
+    .filters input[type="range"] {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .news-card {
+        padding: 1rem;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+    }
+}
