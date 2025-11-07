@@ -1,5 +1,10 @@
-fastapi
-uvicorn[standard]
-requests
-pydantic
-python-multipart
+Flask==3.0.3
+flask-cors==4.0.1
+feedparser==6.0.11
+newspaper3k==0.2.8
+requests==2.32.3
+python-dotenv==1.0.1
+APScheduler==3.10.4
+tenacity==8.5.0
+SQLAlchemy==2.0.32
+lxml[html_clean]==5.2.2

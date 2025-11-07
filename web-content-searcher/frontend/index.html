@@ -1,49 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Analyzer System</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>News Analyzer System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+    }
+    </style>
+
+
 </head>
-<body class="min-h-screen flex flex-col items-center p-4 md:p-8">
-    
-    <header class="w-full max-w-7xl text-center mb-8">
-        <h1 class="text-3xl font-semibold text-slate-800">News Analyzer System</h1>
-        <p class="mt-1 text-md text-slate-600">Analyze, classify, and monitor daily news.</p>
-    </header>
+<body class="min-h-screen bg-slate-50 font-[Inter]">
+  <header class="w-full max-w-7xl mx-auto p-6">
+    <div class="flex justify-between items-center">
+    <h1 class="text-3xl font-semibold text-slate-800">News Analyzer System</h1>
+        <button id="notifyIcon"
+        class="relative p-2 text-gray-600 hover:text-red-600 transition-colors">
+        <span class="material-symbols-outlined text-3xl">
+          notifications
+        </span>
+        <span id="notifyDot"
+          class="absolute top-1 right-1 w-2 h-2 bg-transparent rounded-full"></span>
+      </button>
+    </div>
+    <p class="text-slate-600">Analyze, classify, and monitor daily Turkish news.</p>
+  </header>
 
-    <section class="w-full max-w-7xl bg-white border border-gray-200 rounded p-4 mb-6 flex flex-col md:flex-row items-center gap-3">
-        <div class="relative w-full">
-            <input type="text" id="searchInput" placeholder="Search news..." class="w-full pl-9 pr-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 transition-colors">
-            <svg class="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-        </div>
-        <select id="categoryFilter" class="w-full md:w-auto border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-1 focus:ring-gray-400 transition-colors">
-            <option value="">All Categories</option>
-            <option value="Economy">Economy</option>
-            <option value="Politics">Politics</option>
-            <option value="Technology">Technology</option>
-            <option value="Sports">Sports</option>
-            <option value="Health">Health</option>
-        </select>
-        <select id="sentimentFilter" class="w-full md:w-auto border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-1 focus:ring-gray-400 transition-colors">
-            <option value="">All Sentiments</option>
-            <option value="Positive">Positive</option>
-            <option value="Neutral">Neutral</option>
-            <option value="Negative">Negative</option>
-        </select>
-    </section>
+  <section class="w-full max-w-7xl mx-auto p-4 flex gap-3 items-center">
+    <select id="presetSelect" class="border px-3 py-2 rounded">
+      <option value="TRT_Manşet">TRT Manşet</option>
+      <option value="TRT_SonDakika">TRT Son Dakika</option>
+      <option value="CNNTurk_Tum">CNN Türk Tüm</option>
+    </select>
+    <input id="searchInput" class="border px-3 py-2 rounded flex-1" placeholder="Search in titles/keywords...">
+    <select id="categoryFilter" class="border px-3 py-2 rounded">
+      <option value="">All Categories</option>
+      <option>Economy</option><option>Politics</option><option>Technology</option><option>Sports</option>
+      <option>Health</option><option>World</option><option>Local</option><option>Culture</option><option>Crime</option><option>Disaster</option><option>Other</option>
+    </select>
+    <select id="sentimentFilter" class="border px-3 py-2 rounded">
+      <option value="">All Sentiments</option>
+      <option>Positive</option><option>Neutral</option><option>Negative</option>
+    </select>
+    <button id="refreshBtn" class="px-4 py-2 bg-blue-600 text-white rounded">Fetch</button>
+  </section>
 
-    <main class="w-full max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="newsList">
-        </main>
+  <main id="newsList" class="w-full max-w-7xl mx-auto p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></main>
 
-    <script src="script.js"></script>
-
+  <script src="script.js"></script>
 </body>
 </html>
