@@ -8,7 +8,6 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from services.scraper import fetch_rss_items
 from services.analyzer import analyze_text_structured
 from services.scoring import compute_risk
-from services.alerts import maybe_alert
 from storage.db import init_db, save_news_item, fetch_news_for_date
 from services.feeds import PRESET_FEEDS
 
@@ -111,7 +110,6 @@ def api_news():
             "rule_hits": rule_hits,
         }
         save_news_item(record)
-        maybe_alert(record)
         enriched.append(record)
     return jsonify({"data": enriched})
 
